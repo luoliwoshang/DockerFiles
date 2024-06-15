@@ -28,10 +28,12 @@ RUN wget https://go.dev/dl/go1.20.14.linux-arm64.tar.gz -O /tmp/go1.20.14.linux-
 
 RUN tar -C /usr/local -xzf /tmp/go1.20.14.linux-arm64.tar.gz
 ENV GOROOT=/usr/local/go
+
 ENV PATH="/root/go/bin:/usr/local/go/bin:/usr/lib/llvm-17/bin:/${PATH}"
 
 ENV CGO_ENABLED=1
 
 RUN git clone https://github.com/goplus/llgo.git ~/llgo
+ENV LLGOROOT=/root/llgo
 
 CMD ["/bin/bash"]
