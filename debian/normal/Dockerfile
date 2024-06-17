@@ -21,6 +21,7 @@ RUN wget -qO - https://apt.llvm.org/llvm-snapshot.gpg.key | apt-key add -
 RUN apt-get update && \
     apt-get install -y libgc-dev && \
     apt-get install -y --no-install-recommends llvm-17-dev && \
+    apt-get install -y lld-17 && \
     apt-get install -y clang-17 && \
     apt-get install -y libcjson-dev
 
