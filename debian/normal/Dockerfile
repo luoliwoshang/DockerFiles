@@ -10,10 +10,6 @@ RUN apt-get update && \
     apt-get install -y gcc && \
     apt-get install -y g++
 
-# 原始的软件源
-# RUN echo 'deb http://apt.llvm.org/focal/ llvm-toolchain-focal-17 main' | sudo tee /etc/apt/sources.list.d/llvm.list
-# RUN wget -qO - https://apt.llvm.org/llvm-snapshot.gpg.key | apt-key add -
-
 # bullseye的软件源
 RUN echo 'deb http://apt.llvm.org/bullseye/ llvm-toolchain-bullseye-17 main' | sudo tee /etc/apt/sources.list.d/llvm.list
 RUN wget -qO - https://apt.llvm.org/llvm-snapshot.gpg.key | apt-key add -
