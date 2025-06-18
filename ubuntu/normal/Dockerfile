@@ -22,6 +22,8 @@ RUN wget -O - https://apt.llvm.org/llvm-snapshot.gpg.key | sudo apt-key add -
 RUN apt-get update && \
     apt-get install -y llvm-19-dev clang-19 libclang-19-dev lld-19 pkg-config libgc-dev libssl-dev zlib1g-dev libffi-dev libcjson-dev libunwind-19-dev libuv1-dev libc++-19-dev python3.12-dev libsqlite3-dev libcjson-dev
 
+RUN apt-get install -y python3-dev
+
 RUN wget https://go.dev/dl/go1.24.2.linux-arm64.tar.gz -O /tmp/go1.24.2.linux-arm64.tar.gz
 
 RUN tar -C /usr/local -xzf /tmp/go1.24.2.linux-arm64.tar.gz
@@ -31,7 +33,10 @@ ENV PATH="/root/go/bin:/usr/local/go/bin:/usr/lib/llvm-19/bin:/${PATH}"
 
 ENV CGO_ENABLED=1
 
-RUN git clone https://github.com/goplus/llgo.git ~/llgo
+RUN git clone https://github.com/goplus/llgo.git ~/llgo && \
+    cd ~/llgo && \
+    git checkout e68355d94f9f9ec17caae6e0d397bd55f8c5ec33
+    
 ENV LLGO_ROOT=/root/llgo
 
 CMD ["/bin/bash"]
