@@ -12,7 +12,7 @@
 ## 构建镜像
 
 ```bash
-cd claude-code-llgo
+cd /Users/zhangzhiyang/Documents/Code/DockerFiles/claude-code-llgo
 docker build -t claude-code-llgo:latest .
 ```
 
@@ -22,6 +22,24 @@ docker build -t claude-code-llgo:latest .
 # 运行交互式容器（保留 Claude Code 配置）
 docker run -it --user root \
   -v "$HOME/.claude-linux:/root/.claude" \
+  claude-code-llgo:latest bash
+
+# 挂载 Codex 认证文件（auth.json）
+docker run -it --user root \
+  -v /Users/zhangzhiyang/.codex/auth.json:/root/.codex/auth.json:ro \
+  claude-code-llgo:latest bash
+
+# 挂载 GitHub SSH 与 gitconfig（用于 git push）
+docker run -it --user root \
+  -v /Users/zhangzhiyang/.ssh:/root/.ssh:ro \
+  -v /Users/zhangzhiyang/.gitconfig:/root/.gitconfig:ro \
+  claude-code-llgo:latest bash
+
+# 一次性挂载 Codex + GitHub 认证
+docker run -it --user root \
+  -v /Users/zhangzhiyang/.codex/auth.json:/root/.codex/auth.json:ro \
+  -v /Users/zhangzhiyang/.ssh:/root/.ssh:ro \
+  -v /Users/zhangzhiyang/.gitconfig:/root/.gitconfig:ro \
   claude-code-llgo:latest bash
 
 # 或者映射工作目录
